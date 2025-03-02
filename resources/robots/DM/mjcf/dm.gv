@@ -1,0 +1,53 @@
+digraph G {
+node [shape=box];
+"world" [label="world"];
+"base_link" [label="base_link"];
+"loin_yaw_Link" [label="loin_yaw_Link"];
+"leg_l1_link" [label="leg_l1_link"];
+"leg_l2_link" [label="leg_l2_link"];
+"leg_l3_link" [label="leg_l3_link"];
+"left_knee_link" [label="left_knee_link"];
+"left_ankle_link" [label="left_ankle_link"];
+"leg_l_f1_link" [label="leg_l_f1_link"];
+"leg_l_f2_link" [label="leg_l_f2_link"];
+"leg_r1_link" [label="leg_r1_link"];
+"leg_r2_link" [label="leg_r2_link"];
+"leg_r3_link" [label="leg_r3_link"];
+"right_knee_link" [label="right_knee_link"];
+"right_ankle_link" [label="right_ankle_link"];
+"leg_r_f1_link" [label="leg_r_f1_link"];
+"leg_r_f2_link" [label="leg_r_f2_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"world" -> "floating_base_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"floating_base_joint" -> "base_link"
+"base_link" -> "loin_yaw_joint" [label="xyz: -0.012333 0 -0.24525 \nrpy: 0 -0 0"]
+"loin_yaw_joint" -> "loin_yaw_Link"
+"loin_yaw_Link" -> "left_leg_pitch_joint" [label="xyz: 3.7385e-05 0.05355 -0.062 \nrpy: 0 -0 0"]
+"left_leg_pitch_joint" -> "leg_l1_link"
+"leg_l1_link" -> "left_leg_roll_joint" [label="xyz: 0.031079 0.041978 0 \nrpy: 0 -0 0"]
+"left_leg_roll_joint" -> "leg_l2_link"
+"leg_l2_link" -> "left_leg_yaw_joint" [label="xyz: -0.03105 2.1677e-05 -0.07405 \nrpy: 0 -0 0"]
+"left_leg_yaw_joint" -> "leg_l3_link"
+"leg_l3_link" -> "left_knee_joint" [label="xyz: 2.1677e-05 0.03105 -0.11705 \nrpy: 0 -0 0"]
+"left_knee_joint" -> "left_knee_link"
+"left_knee_link" -> "left_ankle_joint" [label="xyz: -3.1151e-05 -0.02305 -0.2 \nrpy: 0 -0 0"]
+"left_ankle_joint" -> "left_ankle_link"
+"left_ankle_link" -> "leg_l5_fixed_1" [label="xyz: 0.113 -0.008 -0.006 \nrpy: 0 -0 0"]
+"leg_l5_fixed_1" -> "leg_l_f1_link"
+"left_ankle_link" -> "leg_l5_fixed_2" [label="xyz: -0.061 -0.008 -0.006 \nrpy: 0 -0 0"]
+"leg_l5_fixed_2" -> "leg_l_f2_link"
+"loin_yaw_Link" -> "right_leg_pitch_joint" [label="xyz: -3.7385e-05 -0.05355 -0.062 \nrpy: 0 -0 0"]
+"right_leg_pitch_joint" -> "leg_r1_link"
+"leg_r1_link" -> "right_leg_roll_joint" [label="xyz: 0.031021 -0.042022 0 \nrpy: 0 -0 0"]
+"right_leg_roll_joint" -> "leg_r2_link"
+"leg_r2_link" -> "right_leg_yaw_joint" [label="xyz: -0.03105 2.1677e-05 -0.07405 \nrpy: 0 -0 0"]
+"right_leg_yaw_joint" -> "leg_r3_link"
+"leg_r3_link" -> "right_knee_joint" [label="xyz: -2.1677e-05 -0.03105 -0.11705 \nrpy: 0 -0 0"]
+"right_knee_joint" -> "right_knee_link"
+"right_knee_link" -> "right_ankle_joint" [label="xyz: 1.6127e-05 0.0231 -0.2 \nrpy: 0 -0 0"]
+"right_ankle_joint" -> "right_ankle_link"
+"right_ankle_link" -> "leg_r5_fixed_1" [label="xyz: 0.113 0.008 -0.006 \nrpy: 0 -0 0"]
+"leg_r5_fixed_1" -> "leg_r_f1_link"
+"right_ankle_link" -> "leg_r5_fixed_2" [label="xyz: -0.061 0.008 -0.006 \nrpy: 0 -0 0"]
+"leg_r5_fixed_2" -> "leg_r_f2_link"
+}

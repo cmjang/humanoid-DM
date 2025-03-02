@@ -1,0 +1,24 @@
+Sun Feb 23 21:26:11 2025
+WARNING: mju_openResource: unknown file '/home/b207/Documents/humanoid-gym-main/resources/robots/DM/mjcf/DM.xml'
+
+Sun Feb 23 22:08:11 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 10. The simulation is unstable. Time = 3.6350.
+
+Sun Feb 23 22:31:05 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 1.3010.
+
+Mon Feb 24 13:20:41 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.8080.
+
+Mon Feb 24 20:21:45 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.8080.
+
+Tue Feb 25 21:41:26 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 15. The simulation is unstable. Time = 0.5530.
+
+Tue Feb 25 21:43:15 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 15. The simulation is unstable. Time = 0.5530.
+
+Tue Feb 25 21:44:20 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 9. The simulation is unstable. Time = 0.3720.
+

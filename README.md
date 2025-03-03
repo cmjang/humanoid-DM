@@ -1,62 +1,4 @@
-# <a href="https://sites.google.com/view/humanoid-gym/">Humanoid-Gym: Reinforcement Learning for Humanoid Robot with Zero-Shot Sim2Real Transfer</a>
-
-<a href="https://sites.google.com/view/humanoid-gym/"><strong>Project Page</strong></a>
-  |
-  <a href="https://arxiv.org/abs/2404.05695"><strong>arXiv</strong></a>
-  |
-  <a href="https://twitter.com/roboterax/status/1765038672641175662"><strong>Twitter</strong></a>
-
-  <a href="https://github.com/zlw21gxy">Xinyang Gu*</a>, 
-  <a href="https://wangyenjen.github.io/">Yen-Jen Wang*</a>,
-  <a href="http://people.iiis.tsinghua.edu.cn/~jychen/">Jianyu Chen†</a>
-
-  *: Equal contribution. Project Co-lead., †: Corresponding Author.
-
-![Demo](./images/demo.gif)
-
-Humanoid-Gym is an easy-to-use reinforcement learning (RL) framework based on Nvidia Isaac Gym, designed to train locomotion skills for humanoid robots, emphasizing zero-shot transfer from simulation to the real-world environment. Humanoid-Gym also integrates a sim-to-sim framework from Isaac Gym to Mujoco that allows users to verify the trained policies in different physical simulations to ensure the robustness and generalization of the policies.
-
-This codebase is verified by RobotEra's XBot-S (1.2-meter tall humanoid robot) and XBot-L (1.65-meter tall humanoid robot) in a real-world environment with zero-shot sim-to-real transfer.
-
-## Features
-
-### 1. Humanoid Robot Training
-This repository offers comprehensive guidance and scripts for the training of humanoid robots. Humanoid-Gym features specialized rewards for humanoid robots, simplifying the difficulty of sim-to-real transfer. In this repository, we use RobotEra's XBot-L as a primary example. It can also be used for other robots with minimal adjustments. Our resources cover setup, configuration, and execution. Our goal is to fully prepare the robot for real-world locomotion by providing in-depth training and optimization.
-
-
-- **Comprehensive Training Guidelines**: We offer thorough walkthroughs for each stage of the training process.
-- **Step-by-Step Configuration Instructions**: Our guidance is clear and succinct, ensuring an efficient setup process.
-- **Execution Scripts for Easy Deployment**: Utilize our pre-prepared scripts to streamline the training workflow.
-
-### 2. Sim2Sim Support
-We also share our sim2sim pipeline, which allows you to transfer trained policies to highly accurate and carefully designed simulated environments. Once you acquire the robot, you can confidently deploy the RL-trained policies in real-world settings.
-
-Our simulator settings, particularly with Mujoco, are finely tuned to closely mimic real-world scenarios. This careful calibration ensures that the performances in both simulated and real-world environments are closely aligned. This improvement makes our simulations more trustworthy and enhances our confidence in their applicability to real-world scenarios.
-
-
-### 3. Denoising World Model Learning
-#### Robotics: Science and Systems (RSS), 2024 (Best Paper Award Finalist)
-<a href="https://enriquecoronadozu.github.io/rssproceedings2024/rss20/p058.pdf"><strong>Paper</strong></a>
-|
-<a href="https://x.com/wangyenjen/status/1792741940087394540"><strong>Twitter</strong></a>
-
-<a href="https://github.com/zlw21gxy">Xinyang Gu*</a>, 
-<a href="https://wangyenjen.github.io/">Yen-Jen Wang*</a>,
-Xiang Zhu*, Chengming Shi*, Yanjiang Guo, Yichen Liu,
-<a href="http://people.iiis.tsinghua.edu.cn/~jychen/">Jianyu Chen†</a>
-
-*: Equal contribution. Project Co-lead., †: Corresponding Author.
-
-Denoising World Model Learning(DWL) presents an advanced sim-to-real framework that integrates state estimation and system identification. This dual-method approach ensures the robot's learning and adaptation are both practical and effective in real-world contexts.
-
-- **Enhanced Sim-to-real Adaptability**: Techniques to optimize the robot's transition from simulated to real environments.
-- **Improved State Estimation Capabilities**: Advanced tools for precise and reliable state analysis.
-
-### Perceptive Locomotion Learning for Humanoid Robots (Coming Soon!)
-<a href="https://x.com/roboterax/status/1798694054374564010"><strong>Twitter</strong></a>
-
-### Dexterous Hand Manipulation (Coming Soon!)
-<a href="https://x.com/roboterax/status/1791349763448938924"><strong>Twitter</strong></a>
+# 达妙人形强化学习仓库
 
 ## Installation
 
@@ -72,7 +14,7 @@ Denoising World Model Learning(DWL) presents an advanced sim-to-real framework t
    - Consult `isaacgym/docs/index.html` for troubleshooting.
 6. Install humanoid-gym:
    - Clone this repository.
-   - `cd humanoid-gym && pip install -e .`
+   - `pip install -e .`
 
 
 
@@ -83,7 +25,7 @@ Denoising World Model Learning(DWL) presents an advanced sim-to-real framework t
 ```bash
 # Launching PPO Policy Training for 'v1' Across 4096 Environments
 # This command initiates the PPO algorithm-based training for the humanoid task.
-python scripts/train.py --task=humanoid_ppo --run_name v1 --headless --num_envs 4096
+python scripts/train.py --task=DM_ppo --run_name v1 --headless --num_envs 4096
 
 # Evaluating the Trained PPO Policy 'v1'
 # This command loads the 'v1' policy for performance assessment in its environment. 
@@ -92,10 +34,10 @@ python scripts/play.py --task=humanoid_ppo --run_name v1
 
 # Implementing Simulation-to-Simulation Model Transformation
 # This command facilitates a sim-to-sim transformation using exported 'v1' policy.
-python scripts/sim2sim.py --load_model /path/to/logs/XBot_ppo/exported/policies/policy_1.pt
+python scripts/sim2sim.py --load_model /path/to/logs/DM_ppo/exported/policies/policy_1.pt
 
 # Run our trained policy
-python scripts/sim2sim.py --load_model /path/to/logs/XBot_ppo/exported/policies/policy_example.pt
+python scripts/sim2sim.py --load_model /path/to/logs/DM_ppo/exported/policies/policy_example.pt
 
 ```
 
@@ -113,11 +55,11 @@ python scripts/sim2sim.py --load_model /path/to/logs/XBot_ppo/exported/policies/
 #### 2. PPO Policy
 - **Training Command**: For training the PPO policy, execute:
   ```
-  python humanoid/scripts/train.py --task=humanoid_ppo --load_run log_file_path --name run_name
+  python humanoid/scripts/train.py --task=DM_ppo --load_run log_file_path --name run_name
   ```
 - **Running a Trained Policy**: To deploy a trained PPO policy, use:
   ```
-  python humanoid/scripts/play.py --task=humanoid_ppo --load_run log_file_path --name run_name
+  python humanoid/scripts/play.py --task=DM_ppo --load_run log_file_path --name run_name
   ```
 - By default, the latest model of the last run from the experiment folder is loaded. However, other run iterations/models can be selected by adjusting `load_run` and `checkpoint` in the training config.
 
@@ -216,7 +158,3 @@ Please cite the following if you use this code or parts of it:
 ## Acknowledgment
 
 The implementation of Humanoid-Gym relies on resources from [legged_gym](https://github.com/leggedrobotics/legged_gym) and [rsl_rl](https://github.com/leggedrobotics/rsl_rl) projects, created by the Robotic Systems Lab. We specifically utilize the `LeggedRobot` implementation from their research to enhance our codebase.
-
-## Any Questions?
-
-If you have any more questions, please contact [support@robotera.com](mailto:support@robotera.com) or create an issue in this repository.

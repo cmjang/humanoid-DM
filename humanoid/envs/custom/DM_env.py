@@ -40,39 +40,7 @@ from humanoid.utils.terrain import  HumanoidTerrain
 
 
 class DMFreeEnv(LeggedRobot):
-    '''
-    XBotLFreeEnv is a class that represents a custom environment for a legged robot.
 
-    Args:
-        cfg (LeggedRobotCfg): Configuration object for the legged robot.
-        sim_params: Parameters for the simulation.
-        physics_engine: Physics engine used in the simulation.
-        sim_device: Device used for the simulation.
-        headless: Flag indicating whether the simulation should be run in headless mode.
-
-    Attributes:
-        last_feet_z (float): The z-coordinate of the last feet position.
-        feet_height (torch.Tensor): Tensor representing the height of the feet.
-        sim (gymtorch.GymSim): The simulation object.
-        terrain (HumanoidTerrain): The terrain object.
-        up_axis_idx (int): The index representing the up axis.
-        command_input (torch.Tensor): Tensor representing the command input.
-        privileged_obs_buf (torch.Tensor): Tensor representing the privileged observations buffer.
-        obs_buf (torch.Tensor): Tensor representing the observations buffer.
-        obs_history (collections.deque): Deque containing the history of observations.
-        critic_history (collections.deque): Deque containing the history of critic observations.
-
-    Methods:
-        _push_robots(): Randomly pushes the robots by setting a randomized base velocity.
-        _get_phase(): Calculates the phase of the gait cycle.
-        _get_gait_phase(): Calculates the gait phase.
-        compute_ref_state(): Computes the reference state.
-        create_sim(): Creates the simulation, terrain, and environments.
-        _get_noise_scale_vec(cfg): Sets a vector used to scale the noise added to the observations.
-        step(actions): Performs a simulation step with the given actions.
-        compute_observations(): Computes the observations.
-        reset_idx(env_ids): Resets the environment for the specified environment IDs.
-    '''
     def __init__(self, cfg: LeggedRobotCfg, sim_params, physics_engine, sim_device, headless):
         super().__init__(cfg, sim_params, physics_engine, sim_device, headless)
         self.last_feet_z = 0.05

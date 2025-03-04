@@ -37,12 +37,19 @@ from scipy.spatial.transform import Rotation as R
 from humanoid import LEGGED_GYM_ROOT_DIR
 from humanoid.envs import DMCfg
 import torch
+from humanoid.scripts.KeyboardController import KeyboardController
 
 
 class cmd:
     vx = 0.0
     vy = 0.0
     dyaw = 0.0
+
+    @classmethod
+    def update_from_controller(cls, stick_values):
+        cls.vx = stick_values["left_stick_y"] * 0.6  # 前后移动
+        cls.vy = stick_values["left_stick_x"] * 0.6  # 左右移动
+        cls.dyaw = stick_values["right_stick_x"] * 0.5  # 转向
 
 
 def quaternion_to_euler_array(quat):
@@ -126,6 +133,8 @@ def run_mujoco(policy, cfg):
 
     for _ in tqdm(range(int(cfg.sim_config.sim_duration / cfg.sim_config.dt)), desc="Simulating..."):
 
+        # 更新cmd类中的值
+        cmd.update_from_controller(keyboard_controller.get_stick_values())
         # Obtain an observation
         q, dq, quat, v, omega, gvec = get_obs(data)
         q = q[-cfg.env.num_actions:]
@@ -161,8 +170,8 @@ def run_mujoco(policy, cfg):
             action = np.clip(action, -cfg.normalization.clip_actions, cfg.normalization.clip_actions)
 
             target_q = action * cfg.control.action_scale + default_angle
-            if count_lowlevel>800:
-                cmd.vx=0.4
+            # if count_lowlevel>800:
+            #     cmd.vx=0.6
 
             #     target_q = action * cfg.control.action_scale+default_angle
             # else:
@@ -190,6 +199,8 @@ if __name__ == '__main__':
     parser.add_argument('--terrain', action='store_true',default='plane' ,help='terrain or plane')
     args = parser.parse_args()
 
+    keyboard_controller = KeyboardController()   #init keyboard controller
+
     class Sim2simCfg(DMCfg):
 
         class sim_config:
@@ -197,7 +208,7 @@ if __name__ == '__main__':
                 mujoco_model_path = f'{LEGGED_GYM_ROOT_DIR}/resources/robots/DM/mjcf/dm.xml'
             else:
                 mujoco_model_path = f'{LEGGED_GYM_ROOT_DIR}/resources/robots/DM/mjcf/dm.xml'
-            sim_duration = 100
+            sim_duration = 10
             dt = 0.001
             decimation = 10
 

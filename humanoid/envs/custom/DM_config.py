@@ -165,15 +165,15 @@ class DMCfg(LeggedRobotCfg):
         heading_command = True  # if true: compute ang vel command from heading error
 
         class ranges:
-            lin_vel_x = [-0.3, 0.6]   # min max [m/s]
-            lin_vel_y = [-0.3, 0.3]   # min max [m/s]
+            lin_vel_x = [-0.6, 0.6]   # min max [m/s]
+            lin_vel_y = [-0.6, 0.6]   # min max [m/s]
             ang_vel_yaw = [-0.3, 0.3] # min max [rad/s]
             heading = [-3.14, 3.14]
 
     class rewards:
-        base_height_target = 0.50
+        base_height_target = 0.55
         min_dist = 0.2
-        max_dist = 0.5
+        max_dist = 0.6
         # put some settings here for LLM parameter tuning
         target_joint_pos_scale = 0.26    # rad
         target_feet_height = 0.12        # m
@@ -190,10 +190,10 @@ class DMCfg(LeggedRobotCfg):
             feet_clearance = 2.0
             feet_contact_number = 1.2
             # gait
-            feet_air_time = 2.8
+            feet_air_time = 3
             foot_slip = -0.15
-            feet_distance = 0.3
-            knee_distance = 0.3
+            feet_distance = 0.5
+            knee_distance = 0.5
             # contact
             feet_contact_forces = -0.01
             # vel tracking
@@ -204,11 +204,11 @@ class DMCfg(LeggedRobotCfg):
             track_vel_hard = 0.5
             # base pos
             default_joint_pos = 0.4
-            orientation = 1.
-            base_height = 0.25
-            base_acc = 0.2
+            orientation = 2
+            base_height = 0.2
+            base_acc = 0.4
             # energy
-            action_smoothness = -0.02
+            action_smoothness = -0.05
             torques = -1e-5
             dof_vel = -5e-4
             dof_acc = -1e-7
